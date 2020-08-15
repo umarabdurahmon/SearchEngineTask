@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SearchEngineTask.Database.DbModels.Search>
+
+@{
+    ViewBag.Title = "SearchHistory";
+}
+
+<h2>Search history</h2>
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchEngineName)
+            </th>
+            <th></th>
+        </tr>
+
+       @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SearchText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SearchEngineName)
+            </td>
+            <td>
+                @Html.ActionLink("Show results", "SearchResults", new { id=item.SearchId }) 
+            </td>
+        </tr>
+        }
+
+    </table>

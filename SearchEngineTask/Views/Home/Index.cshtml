@@ -1,0 +1,40 @@
+﻿@model SearchEngineTask.Models.ResponseModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container" style="margin: 20px">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <form action="/Home/Index" method="post">
+                    <input type="text" id="SearchText" name="SearchText" value="" placeholder="Search" />
+                    <input type="submit" value="Search" />
+                </form>
+                <a href="/Home/SearchHistory">Go to search history</a>
+            </div>
+
+            <hr />
+            
+            @if (Model.Captcha != null)
+            {
+                <form action="/Home/VerfiyCaptcha" method="post">
+                    <img src="@Model.Captcha.url_captcha" alt="Alternate Text" />
+                    <input type="text" name="rep" value="" style="margin-top: 2%" placeholder="Captcha text" />
+                    <input type="hidden" name="searchText" value="@Model.Captcha.searchText" />
+                    <input type="hidden" name="retkey" value="@Model.Captcha.retkey" />
+                    <input type="hidden" name="key" value="@Model.Captcha.key" />
+                    <input type="submit" value="Verify" />
+                </form>
+            }
+            else
+            {
+                foreach (var item in Model.Responses)
+                {
+                    <a href="@item.Link"><h3>@item.Title</h3></a>
+                    <p>@item.Description</p>
+                }
+            }
+        </div>
+    </div>
+</div>
