@@ -10,7 +10,7 @@ namespace SearchEngineTask.Database.Services
 {
     public class SearchService
     {
-        private SearchEngineDbContext _database;
+        public SearchEngineDbContext _database { get; set; }
 
         public SearchService()
         {
@@ -52,10 +52,6 @@ namespace SearchEngineTask.Database.Services
             return true;
         }
 
-        public IEnumerable<Search> GetSearches()
-        {
-            return _database.Searches;
-        }
 
         public IEnumerable<SearchResult> GetSearchResults(int id)
         {

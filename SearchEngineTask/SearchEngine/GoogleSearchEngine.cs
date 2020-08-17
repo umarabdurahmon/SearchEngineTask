@@ -16,7 +16,7 @@ namespace SearchEngineTask.SearchEngine
 
         public GoogleSearchEngine()
         {
-            _searchEngineUrl = "https://www.google.com/search?num=100&q=";
+            _searchEngineUrl = "https://www.google.com/search?&q=";
         }
 
         public ResponseModel GetResposeResult(string searchText)

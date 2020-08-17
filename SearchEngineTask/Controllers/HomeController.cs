@@ -34,6 +34,7 @@ namespace SearchEngineTask.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(string SearchText)
         {
+            ViewBag.SearchText = SearchText; 
             foreach (string key in Request.Cookies.AllKeys)
             {
                 HttpCookie c = Request.Cookies[key];
@@ -42,13 +43,14 @@ namespace SearchEngineTask.Controllers
             }
             IEnumerable<ISearchEngine> engine = new List<ISearchEngine>
             {
-                //new BingSearchEngine(),
+                //new BingSearchEngine() is added in try catch block because it uses async method,
                 new GoogleSearchEngine(),
                 new YandexSearchEngine()
             };
 
             var model = new ResponseModel();
 
+            // Cheking if captcha exist
             try
             {
                 var bing = await new BingSearchEngine().GetResposeResultAsync(SearchText);
@@ -90,19 +92,40 @@ namespace SearchEngineTask.Controllers
             return RedirectToAction("Index", new { SearchText = captchaModel.searchText });
         }
 
+        /// <summary>
+        /// All search requests
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult SearchHistory()
         {
-            return View(_dbService.GetSearches());
+            return View(_dbService._database.Searches);
         }
 
+        /// <summary>
+        /// Search results by search id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult SearchResults(int id)
         {
+            ViewBag.Seachtext = _dbService._database.Searches
+                .Where(x => x.SearchId == id)
+                .FirstOrDefault()
+                .SearchText;
             return View(_dbService.GetSearchResults(id));
         }
 
-
+        /// <summary>
+        /// Json method: returns last 10 search request
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult GetHistory()
+        {
+            return Json(new { list = _dbService._database.Searches.OrderByDescending(x => x.SearchId).Take(10) }, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

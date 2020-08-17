@@ -217,7 +217,6 @@
       <DependentUpon>202008140649209_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ITestInterface.cs" />
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
