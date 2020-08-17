@@ -57,6 +57,7 @@ namespace SearchEngineTask.Controllers
                 var list = engine.Select(p => p.GetResposeResult(SearchText)).ToList();
                 list.Add(bing);
 
+                list = list.Where(item => item.Responses.Count > 1).ToList();
                 model = list.Where(item => item.ResponseDuration == (list.Min(x => x.ResponseDuration))).FirstOrDefault();
 
                 _dbService.InsertSearchResults(model, SearchText);
@@ -80,15 +81,22 @@ namespace SearchEngineTask.Controllers
         {
             
             var request = new Leaf.xNet.HttpRequest();            
-            request.Cookies = new Leaf.xNet.CookieStorage();
+            //request.Cookies = new Leaf.xNet.CookieStorage();
 
             request.UserAgent = Leaf.xNet.Http.ChromeUserAgent();
             request.AddHeader("key", WebUtility.UrlEncode(captchaModel.key));
             request.AddHeader("retpath", WebUtility.UrlEncode(captchaModel.retkey));
             request.AddHeader("rep", WebUtility.UrlEncode(captchaModel.rep));
-            request.AddHeader("Host","yandex.uz");
+            //request.AddHeader("Host","yandex.com");
 
-            Leaf.xNet.HttpResponse response = request.Get(@"http://yandex.uz/checkcaptcha");
+            try
+            {
+                Leaf.xNet.HttpResponse response = request.Get($"http://yandex.com/xcheckcaptcha?key={captchaModel.key}&rep={captchaModel.rep}"); ; ;
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", new { SearchText = captchaModel.searchText });
+            }
             return RedirectToAction("Index", new { SearchText = captchaModel.searchText });
         }
 
@@ -99,7 +107,7 @@ namespace SearchEngineTask.Controllers
         [HttpGet]
         public ActionResult SearchHistory()
         {
-            return View(_dbService._database.Searches);
+            return View(_dbService._database.Searches.OrderByDescending(x => x.SearchId));
         }
 
         /// <summary>

@@ -25,21 +25,24 @@ namespace SearchEngineTask.SearchEngine
             var returnModel = new ResponseModel();
 
             // Start timer
-            Stopwatch sw = Stopwatch.StartNew();
-            var result = new HtmlWeb().Load(_searchEngineUrl + WebUtility.UrlEncode(searchText));
+            Stopwatch sw = Stopwatch.StartNew();            
+            var web = new HtmlWeb();
+            web.UseCookies = true;
+            var result = web.Load(_searchEngineUrl + WebUtility.UrlEncode(searchText));
+
             sw.Stop();
 
             /// Match captcha if exist
-            var captcha = result.DocumentNode.SelectNodes("//div[@class='b-captcha']");
+            var captcha = result.DocumentNode.SelectNodes("//div[@class='captcha__image']//img");
 
-            if (captcha != null)
+            if (false /*captcha != null* captcha currently dont work*/)
             {
                 //Get captcha parametrs from html
                 HtmlNodeCollection inputs = captcha[0].SelectNodes("//input");
                 string key_captcha = inputs[0].GetAttributeValue("value", "false").Replace("&amp;amp", "");
-                string return_path_captcha = inputs[1].GetAttributeValue("value", "false").Replace("&amp;amp;", "&amp;"); ;
+                string return_path_captcha = inputs[1].GetAttributeValue("value", "false").Replace("&amp;amp;", "&amp;");
 
-                HtmlNode image = result.DocumentNode.SelectSingleNode("//td[@class='b-captcha__layout__l']//img");
+                HtmlNode image = result.DocumentNode.SelectSingleNode("//div[@class='captcha__image']//img");
                 string url_captcha = image.GetAttributeValue("src", "true");
 
                 

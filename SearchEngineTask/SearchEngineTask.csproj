@@ -234,6 +234,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\search history.png" />
+    <Content Include="Images\search history2.png" />
+    <Content Include="Images\search page.png" />
+    <Content Include="Images\search results.png" />
+    <Content Include="Images\yandex captcha.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
