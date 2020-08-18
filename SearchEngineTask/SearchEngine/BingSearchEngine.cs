@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SearchEngineTask.SearchEngine
@@ -20,7 +19,6 @@ namespace SearchEngineTask.SearchEngine
             _searchEngineUrl = "https://www.bing.com/search?q=";
         }
 
-
         public async Task<ResponseModel> GetResposeResultAsync(string searchText)
         {
             var returnModel = new ResponseModel();
@@ -29,7 +27,7 @@ namespace SearchEngineTask.SearchEngine
             Stopwatch sw = Stopwatch.StartNew();
             /*
              * Bing does not return properly content with HtmlWeb class, However other engines returns properly.
-             * 
+             *
              * var web = new HtmlWeb();
             web.PreRequest = delegate (HttpWebRequest webReq)
             {
@@ -76,8 +74,6 @@ namespace SearchEngineTask.SearchEngine
             returnModel.SearchEngineName = "Bing";
             return returnModel;
         }
-
-        
 
         public ResponseModel GetResposeResult(string searchText)
         {

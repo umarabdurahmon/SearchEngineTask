@@ -6,19 +6,19 @@
 
 <h2>Search history</h2>
 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SearchText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SearchEngineName)
+        </th>
+        <th></th>
+    </tr>
 
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SearchText)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SearchEngineName)
-            </th>
-            <th></th>
-        </tr>
-
-       @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.SearchText)
@@ -27,9 +27,8 @@
                 @Html.DisplayFor(modelItem => item.SearchEngineName)
             </td>
             <td>
-                @Html.ActionLink("Show results", "SearchResults", new { id=item.SearchId }) 
+                @Html.ActionLink("Show results", "SearchResults", new { id = item.SearchId })
             </td>
         </tr>
-        }
-
-    </table>
+    }
+</table>

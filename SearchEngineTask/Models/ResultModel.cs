@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SearchEngineTask.Models
+﻿namespace SearchEngineTask.Models
 {
     public class ResultModel
     {
@@ -21,7 +15,6 @@ namespace SearchEngineTask.Models
             Link = link == null ? string.Empty : link;
             Description = description == null ? string.Empty : description;
         }
-
 
         public string Title { get; set; }
         public string Link { get; set; }

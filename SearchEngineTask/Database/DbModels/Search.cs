@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SearchEngineTask.Database.DbModels
 {
@@ -16,6 +12,7 @@ namespace SearchEngineTask.Database.DbModels
 
         [Key]
         public int SearchId { get; set; }
+
         public string SearchText { get; set; }
         public string SearchEngineName { get; set; }
 

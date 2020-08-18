@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SearchEngineTask.SearchEngine
 {
@@ -25,7 +23,7 @@ namespace SearchEngineTask.SearchEngine
             var returnModel = new ResponseModel();
 
             // Start timer
-            Stopwatch sw = Stopwatch.StartNew();            
+            Stopwatch sw = Stopwatch.StartNew();
             var web = new HtmlWeb();
             web.UseCookies = true;
             var result = web.Load(_searchEngineUrl + WebUtility.UrlEncode(searchText));
@@ -45,7 +43,6 @@ namespace SearchEngineTask.SearchEngine
                 HtmlNode image = result.DocumentNode.SelectSingleNode("//div[@class='captcha__image']//img");
                 string url_captcha = image.GetAttributeValue("src", "true");
 
-                
                 YandexCaptchaModel captchaModel = new YandexCaptchaModel()
                 {
                     url_captcha = url_captcha,
@@ -87,7 +84,7 @@ namespace SearchEngineTask.SearchEngine
 
             returnModel.ResponseDuration = sw.Elapsed;
             returnModel.SearchEngineName = "Yandex";
-            
+
             return returnModel;
         }
     }

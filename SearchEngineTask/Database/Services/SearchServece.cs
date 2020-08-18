@@ -3,8 +3,6 @@ using SearchEngineTask.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SearchEngineTask.Database.Services
 {
@@ -31,12 +29,12 @@ namespace SearchEngineTask.Database.Services
 
                 foreach (var item in responseModel.Responses)
                 {
-                    _database.SearchesResults.Add(new SearchResult() 
+                    _database.SearchesResults.Add(new SearchResult()
                     {
                         Url = item.Link,
                         Title = item.Title,
                         Description = item.Description,
-                        Search = searchModel,   
+                        Search = searchModel,
                         SearchId = insertedModel.SearchId
                     });
                 }
@@ -45,13 +43,11 @@ namespace SearchEngineTask.Database.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
 
             return true;
         }
-
 
         public IEnumerable<SearchResult> GetSearchResults(int id)
         {

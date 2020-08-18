@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SearchEngineTask.SearchEngine
 {
@@ -52,15 +50,13 @@ namespace SearchEngineTask.SearchEngine
                               .Take(10)
                               .ToList();
 
-            
-            returnModel.Responses =  links.Zip(
-                titles.Zip(descriptions, Tuple.Create),(link, tuple) => new ResultModel(link, tuple.Item1, tuple.Item2)
+            returnModel.Responses = links.Zip(
+                titles.Zip(descriptions, Tuple.Create), (link, tuple) => new ResultModel(link, tuple.Item1, tuple.Item2)
                 ).ToList();
 
             returnModel.ResponseDuration = sw.Elapsed;
             returnModel.SearchEngineName = "Google";
             return returnModel;
         }
-
     }
 }
