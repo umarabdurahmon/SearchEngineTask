@@ -16,7 +16,7 @@ namespace SearchEngineTask.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController cont roller = new HomeController();
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
