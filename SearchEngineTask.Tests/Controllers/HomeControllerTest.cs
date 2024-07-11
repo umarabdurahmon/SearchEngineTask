@@ -35,7 +35,7 @@ namespace SearchEngineTask.Tests.Controllers
             ViewResult result = controller.SearchHistory() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(results);
         }
 
 
